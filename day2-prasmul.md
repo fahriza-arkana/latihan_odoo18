@@ -1126,7 +1126,7 @@ staging                       → Testing & integration sebelum ke main
 |------------------|------------------------------------------------------------------------|-----------------------|
 | `main`           | Kode final yang sudah teruji dan siap production/deploy                | Lead / Reviewer       |
 | `staging`        | Tempat integrasi dan testing semua branch kerja sebelum masuk `main`   | Developer (via PR)    |
-| Branch kerja     | Development aktif per-developer atau per-fitur                        | Developer             |
+| `Branch kerja`     | Development aktif per-developer atau per-fitur                        | Developer             |
 
 **Alur kerja:**
 
