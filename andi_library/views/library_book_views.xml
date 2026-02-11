@@ -1,0 +1,103 @@
+<odoo>
+    <record id="view_library_book_list" model="ir.ui.view">
+        <field name="name">library.book.list</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <list string="Daftar Buku">
+                <field name="name"/>
+                <field name="isbn"/>
+                <field name="category_id"/>
+                <field name="published_date"/>
+                <field name="price"/>
+                <field name="available"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_library_book_form" model="ir.ui.view">
+        <field name="name">library.book.form</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <form string="Data Buku">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="category_id"/>
+                        <field name="author_ids" widget="many2many_tags"/>
+                        <field name="published_date"/>
+                        <field name="isbn"/>
+                        <field name="price"/>
+                        <field name="available"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_library_book_search" model="ir.ui.view">
+        <field name="name">library.book.search</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Judul Buku"/>
+                <field name="isbn"/>
+                <field name="category_id"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Menu Root -->
+    <menuitem id="menu_library_root" name="Perpustakaan"/>
+
+    <!-- Submenu Buku -->
+    <menuitem id="menu_library_book" name="Data Buku" parent="menu_library_root"/>
+
+    <!-- Action Window -->
+    <record id="action_library_book" model="ir.actions.act_window">
+        <field name="name">Daftar Buku</field>
+        <field name="res_model">library.book</field>
+        <field name="view_mode">list,form,pivot</field>
+    </record>
+
+    <!-- Hubungan Action Window dengan View -->
+    <record id="action_library_book_list" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="andi_library.view_library_book_list"/>
+        <field name="act_window_id" ref="action_library_book"/>
+    </record>
+
+    <record id="action_library_book_form" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="andi_library.view_library_book_form"/>
+        <field name="act_window_id" ref="action_library_book"/>
+    </record>
+
+    <!-- Pivot View -->
+    <record id="view_library_book_pivot" model="ir.ui.view">
+        <field name="name">library.book.pivot</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <pivot string="Analisis Buku">
+                <field name="category_id" type="row"/>
+                <field name="available" type="col"/>
+                <field name="price" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="action_available_books" model="ir.actions.act_window">
+        <field name="name">Buku Tersedia</field>
+        <field name="res_model">library.book</field>
+        <field name="view_mode">list,form,pivot</field>
+        <field name="domain">[('available', '=', True)]</field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_library_book_list"
+        name="Buku"
+        parent="menu_library_book"
+        action="action_library_book"/>
+</odoo>
