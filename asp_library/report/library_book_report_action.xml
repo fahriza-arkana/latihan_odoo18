@@ -1,0 +1,27 @@
+<odoo>
+    <!-- Report per-Buku (satu halaman per record) -->
+    <record id="action_report_library_book" model="ir.actions.report">
+        <field name="name">Detail Buku ELI</field>
+        <field name="model">library.book</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">asp_library.report_library_book_document</field>
+        <field name="report_file">asp_library.report_library_book_document</field>
+        <field name="print_report_name">'Detail Buku - %s' % object.name</field>
+        <field name="binding_model_id" ref="asp_library.model_library_book"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="asp_library.paperformat_library_report"/>
+    </record>
+
+    <!-- Report Katalog (semua buku terpilih dalam satu dokumen) -->
+    <record id="action_report_library_catalog" model="ir.actions.report">
+        <field name="name">Katalog Perpustakaan</field>
+        <field name="model">library.book</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">asp_library.report_library_catalog_document</field>
+        <field name="report_file">asp_library.report_library_catalog_document</field>
+        <field name="print_report_name">'Katalog Perpustakaan'</field>
+        <field name="binding_model_id" ref="asp_library.model_library_book"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="asp_library.paperformat_library_report"/>
+    </record>
+</odoo>
